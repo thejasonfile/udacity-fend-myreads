@@ -11,7 +11,7 @@ class Bookshelf extends Component {
             {this.props.books.map(book => (
               <li key={book.title}>
                 <Book
-                  backgroundImage={book.backgroundImage}
+                  backgroundImage={book.imageLinks.thumbnail}
                   title={book.title}
                   author={book.author}
                 />
