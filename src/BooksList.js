@@ -8,6 +8,7 @@ class BooksList extends Component {
     books: []
   }
 
+  // Calls the BooksAPI when the component is mounted to the page.
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       console.log(books)
@@ -15,6 +16,12 @@ class BooksList extends Component {
     })
   }
 
+  /*
+   * Function to change the book's shelf passed down to the book component.
+   * It calls the get() function to get the book object and then passes this to
+   * the update() function. This updates the backend information with the new
+   * shelf. Then getAll() is called to refresh the state and force a render
+   */
   changeShelf = (bookId, newShelf) => {
     BooksAPI.get(bookId).then(book => {
       BooksAPI.update(book, newShelf).then(books => {
@@ -25,6 +32,10 @@ class BooksList extends Component {
     })
   }
 
+  /*
+   * Filters the books based on their current shelf so they are rendered
+   * correctly.
+   */
   filterBooks = shelf => this.state.books.filter(book => book.shelf === shelf)
 
   render() {
