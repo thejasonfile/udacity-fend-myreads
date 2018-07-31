@@ -10,11 +10,23 @@ class BooksList extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then(books => {
+      console.log(books)
       this.setState({ books })
     })
   }
 
-  filterBooks = s => this.state.books.filter(book => book.shelf === s)
+  changeShelf = (bookId, newShelf) => {
+    BooksAPI.get(bookId).then(book => {
+      BooksAPI.update(book, newShelf).then(books => {
+        BooksAPI.getAll().then(books => {
+          this.setState({ books })
+        })
+      })
+    })
+  }
+
+  filterBooks = shelf => this.state.books.filter(book => book.shelf === shelf)
+
   render() {
     return (
       <div className="list-books">
@@ -25,13 +37,19 @@ class BooksList extends Component {
           <div>
             <Bookshelf
               title="Currently Reading"
-              books={this.filterBooks('currentlyReading')} />
+              books={this.filterBooks('currentlyReading')}
+              changeShelf={this.changeShelf}
+            />
             <Bookshelf
               title="Want To Read"
-              books={this.filterBooks('wantToRead')} />
+              books={this.filterBooks('wantToRead')}
+              changeShelf={this.changeShelf}
+            />
             <Bookshelf
               title="Read"
-              books={this.filterBooks('read')} />
+              books={this.filterBooks('read')}
+              changeShelf={this.changeShelf}
+            />
           </div>
         </div>
         <div className="open-search">

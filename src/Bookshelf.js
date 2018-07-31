@@ -12,8 +12,11 @@ class Bookshelf extends Component {
               <li key={book.title}>
                 <Book
                   backgroundImage={book.imageLinks.thumbnail}
+                  id={book.id}
                   title={book.title}
                   author={book.author}
+                  shelf={book.shelf}
+                  changeShelf={this.props.changeShelf}
                 />
               </li>
             ))}
