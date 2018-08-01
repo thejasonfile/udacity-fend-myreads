@@ -10,7 +10,7 @@ class SearchList extends Component {
   }
 
   onInputChange = input => {
-    this.setState({ input: input.trim() })
+    this.setState({ input })
     this.searchBooks(input)
   }
 
