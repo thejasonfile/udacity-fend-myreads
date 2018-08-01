@@ -20,6 +20,7 @@ class SearchList extends Component {
       if (!books || books.error) {
         this.setState({ books: [] })
       } else {
+        console.log(books)
         this.setState({ books })
       }
     })
@@ -62,7 +63,7 @@ class SearchList extends Component {
                   backgroundImage={book.imageLinks ? book.imageLinks.thumbnail : ""}
                   id={book.id}
                   title={book.title}
-                  author={book.author}
+                  author={book.authors ? book.authors[0] : ""}
                   shelf={book.shelf}
                   changeShelf={this.props.changeShelf}
                 />
