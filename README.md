@@ -28,6 +28,9 @@ This should open a browser window to the project.  If not, open your browser to 
 You can move the books by selecting the dropdown next to each book and choosing
 a different shelf.
 
+Click the '+' symbol to conduct a search of books. You can add these books to
+your shelves by selecting an option from the dropdown.
+
 ## Contributing
 
 If you have something to add or change with the code, please submit a Pull Request and it will be reviewed.
