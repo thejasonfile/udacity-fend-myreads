@@ -15,8 +15,13 @@ class SearchList extends Component {
   }
 
   searchBooks = input => {
+    if (input)
     BooksAPI.search(input).then(books => {
-    this.setState({ books })
+      if (!books || books.error) {
+        this.setState({ books: [] })
+      } else {
+        this.setState({ books })
+      }
     })
   }
 
@@ -51,10 +56,10 @@ class SearchList extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books && (this.state.books.map((book, index) => (
+            {this.state.books.map((book, index) => (
               <li key={index}>
                 <Book
-                  backgroundImage={book.imageLinks.thumbnail}
+                  backgroundImage={book.imageLinks ? book.imageLinks.thumbnail : ""}
                   id={book.id}
                   title={book.title}
                   author={book.author}
@@ -62,7 +67,7 @@ class SearchList extends Component {
                   changeShelf={this.props.changeShelf}
                 />
               </li>
-            )))}
+            ))}
           </ol>
         </div>
       </div>
