@@ -1,7 +1,25 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Book from './Book'
+import * as BooksAPI from './BooksAPI'
 
 class SearchList extends Component {
+  state = {
+    books: [],
+    input: ''
+  }
+
+  onInputChange = input => {
+    this.setState({ input: input.trim() })
+    this.searchBooks(input)
+  }
+
+  searchBooks = input => {
+    BooksAPI.search(input).then(books => {
+    this.setState({ books })
+    })
+  }
+
   render() {
     return (
       <div className="search-books">
@@ -23,12 +41,29 @@ class SearchList extends Component {
               * author or title. Every search is limited by search terms.
               */
           }
-            <input type="text" placeholder="Search by title or author"/>
-
+            <input
+              onChange={e => this.onInputChange(e.target.value)}
+              value={this.state.input}
+              type="text"
+              placeholder="Search by title or author"
+            />
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
+          <ol className="books-grid">
+            {this.state.books && (this.state.books.map((book, index) => (
+              <li key={index}>
+                <Book
+                  backgroundImage={book.imageLinks.thumbnail}
+                  id={book.id}
+                  title={book.title}
+                  author={book.author}
+                  shelf={book.shelf}
+                  changeShelf={this.props.changeShelf}
+                />
+              </li>
+            )))}
+          </ol>
         </div>
       </div>
     )
