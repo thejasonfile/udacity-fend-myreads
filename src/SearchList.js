@@ -19,6 +19,9 @@ class SearchList extends Component {
       if(query.length === 0) {
         this.setState({ results: [] })
       }
+      /*
+      * This code was received from a Udacity review
+      */
       if(!!books){
         if(books.length>0){
           const results = books.map(book => {

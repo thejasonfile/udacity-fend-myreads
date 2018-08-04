@@ -19,7 +19,7 @@ class BooksApp extends Component {
 
   /*
    * Calls the BooksAPI update() method to change the shelf of the book
-   * This code is a modified version received from a Udacity review
+   * This code was received from a Udacity review
    */
   changeShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(() => {
@@ -27,7 +27,6 @@ class BooksApp extends Component {
       this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat(book)
       }))
-      debugger
     })
   }
 
