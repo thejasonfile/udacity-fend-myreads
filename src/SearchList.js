@@ -14,16 +14,8 @@ class SearchList extends Component {
     this.searchBooks(input)
   }
 
-  searchBooks = input => {
-    if (input)
-    BooksAPI.search(input).then(books => {
-      if (!books || books.error) {
-        this.setState({ books: [] })
-      } else {
-        console.log(books)
-        this.setState({ books })
-      }
-    })
+  searchBooks = query => {
+
   }
 
   render() {

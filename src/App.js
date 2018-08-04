@@ -25,13 +25,7 @@ class BooksApp extends Component {
    * shelf. Then getAll() is called to refresh the state and force a render
    */
   changeShelf = (bookId, newShelf) => {
-    BooksAPI.get(bookId).then(book => {
-      BooksAPI.update(book, newShelf).then(books => {
-        BooksAPI.getAll().then(books => {
-          this.setState({ books })
-        })
-      })
-    })
+
   }
 
   /*
@@ -54,6 +48,7 @@ class BooksApp extends Component {
         <Route path="/search" render={() => (
           <SearchList
             changeShelf={this.changeShelf}
+            books={this.state.books}
           />
         )}/>
       </div>
