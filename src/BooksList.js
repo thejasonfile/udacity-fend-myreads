@@ -11,17 +11,17 @@ const BooksList = props => (
       <div>
         <Bookshelf
           title="Currently Reading"
-          books={props.filterBooks('currentlyReading')}
+          books={props.books.filter(book => book.shelf === 'currentlyReading')}
           changeShelf={props.changeShelf}
         />
         <Bookshelf
           title="Want To Read"
-          books={props.filterBooks('wantToRead')}
+          books={props.books.filter(book => book.shelf === 'wantToRead')}
           changeShelf={props.changeShelf}
         />
         <Bookshelf
           title="Read"
-          books={props.filterBooks('read')}
+          books={props.books.filter(book => book.shelf === 'read')}
           changeShelf={props.changeShelf}
         />
       </div>

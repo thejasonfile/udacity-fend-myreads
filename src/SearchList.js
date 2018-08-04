@@ -15,7 +15,7 @@ class SearchList extends Component {
   }
 
   searchBooks = query => {
-
+    BooksAPI.search(query).then(res => console.log(res))
   }
 
   render() {

@@ -14,25 +14,21 @@ class BooksApp extends Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books })
-      console.log(books)
     })
   }
 
   /*
-   * Function to change the book's shelf passed down to the book component.
-   * It calls the get() function to get the book object and then passes this to
-   * the update() function. This updates the backend information with the new
-   * shelf. Then getAll() is called to refresh the state and force a render
+   * Calls the BooksAPI update() method to change the shelf of the book
+   * This code is a modified version received from a Udacity review
    */
-  changeShelf = (bookId, newShelf) => {
-
+  changeShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat(book)
+      }))
+    })
   }
-
-  /*
-   * Filters the books based on their current shelf so they are rendered
-   * correctly.
-   */
-  filterBooks = shelf => this.state.books.filter(book => book.shelf === shelf)
 
   render() {
     return (
@@ -42,13 +38,12 @@ class BooksApp extends Component {
             title="MyReads"
             books={this.state.books}
             changeShelf={this.changeShelf}
-            filterBooks={this.filterBooks}
           />
         )}/>
         <Route path="/search" render={() => (
           <SearchList
-            changeShelf={this.changeShelf}
             books={this.state.books}
+            changeShelf={this.changeShelf}
           />
         )}/>
       </div>

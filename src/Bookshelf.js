@@ -9,10 +9,11 @@ const Bookshelf = props => (
         {props.books.map((book, index) => (
           <li key={index}>
             <Book
+              bookObject={book}
               backgroundImage={book.imageLinks.thumbnail}
               id={book.id}
               title={book.title}
-              author={book.authors[0]}
+              author={book.authors}
               shelf={book.shelf}
               changeShelf={props.changeShelf}
             />
