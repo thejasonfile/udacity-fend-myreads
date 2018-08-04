@@ -16,6 +16,9 @@ class SearchList extends Component {
 
   searchBooks = query => {
     BooksAPI.search(query,30).then((books) => {
+      if(query.length === 0) {
+        this.setState({ results: [] })
+      }
       if(!!books){
         if(books.length>0){
           const results = books.map((book) => {
@@ -24,6 +27,9 @@ class SearchList extends Component {
             return book
           });
           this.setState({ results })
+        }
+        else {
+          this.setState({ results: [] })
         }
       }
     })
