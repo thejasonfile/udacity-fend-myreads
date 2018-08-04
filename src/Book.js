@@ -11,8 +11,8 @@ const Book = props => (
           */
         }
         <select
-          onChange={e => props.changeShelf(props.bookObject, e.target.value)}
-          defaultValue={props.shelf}
+          onChange={e => props.changeShelf(props.book, e.target.value)}
+          defaultValue={props.book.shelf}
         >
           <option value="move" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
@@ -22,8 +22,8 @@ const Book = props => (
         </select>
       </div>
     </div>
-    <div className="book-title">{props.title}</div>
-    <div className="book-authors">{props.author}</div>
+    <div className="book-title">{props.book.title}</div>
+    <div className="book-authors">{props.book.author}</div>
   </div>
 )
 

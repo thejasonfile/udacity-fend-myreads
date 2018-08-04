@@ -9,12 +9,8 @@ const Bookshelf = props => (
         {props.books.map((book, index) => (
           <li key={index}>
             <Book
-              bookObject={book}
-              backgroundImage={book.imageLinks.thumbnail}
-              id={book.id}
-              title={book.title}
-              author={book.authors}
-              shelf={book.shelf}
+              book={book}
+              backgroundImage={book.imageLinks ? book.imageLinks.thumbnail : null}
               changeShelf={props.changeShelf}
             />
           </li>

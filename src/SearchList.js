@@ -5,8 +5,8 @@ import * as BooksAPI from './BooksAPI'
 
 class SearchList extends Component {
   state = {
-    books: [],
-    input: ''
+    input: '',
+    results: []
   }
 
   onInputChange = input => {
@@ -15,7 +15,18 @@ class SearchList extends Component {
   }
 
   searchBooks = query => {
-    BooksAPI.search(query).then(res => console.log(res))
+    BooksAPI.search(query,30).then((books) => {
+      if(!!books){
+        if(books.length>0){
+          const results = books.map((book) => {
+            const existingBook = this.props.books.find((b) => b.id === book.id)
+            book.shelf = !!existingBook ? existingBook.shelf : 'none'
+            return book
+          });
+          this.setState({ results })
+        }
+      }
+    })
   }
 
   render() {
@@ -49,14 +60,11 @@ class SearchList extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.map((book, index) => (
+            {this.state.results.map((book, index) => (
               <li key={index}>
                 <Book
+                  book={book}
                   backgroundImage={book.imageLinks ? book.imageLinks.thumbnail : ""}
-                  id={book.id}
-                  title={book.title}
-                  author={book.authors ? book.authors[0] : ""}
-                  shelf={book.shelf}
                   changeShelf={this.props.changeShelf}
                 />
               </li>
