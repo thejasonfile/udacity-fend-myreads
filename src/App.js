@@ -27,6 +27,7 @@ class BooksApp extends Component {
       this.setState(state => ({
         books: state.books.filter(b => b.id !== book.id).concat(book)
       }))
+      debugger
     })
   }
 

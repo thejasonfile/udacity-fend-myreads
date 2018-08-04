@@ -21,8 +21,8 @@ class SearchList extends Component {
       }
       if(!!books){
         if(books.length>0){
-          const results = books.map((book) => {
-            const existingBook = this.props.books.find((b) => b.id === book.id)
+          const results = books.map(book => {
+            const existingBook = this.props.books.find(b => b.id === book.id)
             book.shelf = !!existingBook ? existingBook.shelf : 'none'
             return book
           });
